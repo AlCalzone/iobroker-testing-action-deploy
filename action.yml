@@ -1,6 +1,6 @@
 name: "ioBroker Testing: Deploy"
 author: "AlCalzone"
-#description: 'Greet someone'
+description: "Publish the adapter to npm and create a GitHub release"
 
 inputs:
   node-version:
@@ -14,7 +14,7 @@ inputs:
     default: 'npm'
   build:
     description: "Set to true when the adapter needs a build step"
-    default: false
+    default: "false"
   build-command:
     description: "Overwrite the default build command"
     default: "npm run build"
@@ -27,10 +27,10 @@ inputs:
 
   sentry:
     description: "Enable Sentry releases integration"
-    default: false
+    default: "false"
   sentry-token:
     description: "The token to use to create a Sentry release"
-    default: false
+    default: "false"
   sentry-url:
     description: "Under which URL the Sentry instance is running"
     default: "https://sentry.iobroker.net"
@@ -39,16 +39,16 @@ inputs:
     default: "iobroker"
   sentry-project:
     description: "The project name on Sentry"
-    default: false
+    default: "false"
   sentry-version-prefix:
     description: "The prefix for release versions on Sentry"
-    default: false
+    default: "false"
   sentry-github-integration:
     description: "Set to true once Github integration is set up in Sentry"
-    default: false
+    default: "false"
   sentry-sourcemap-paths:
     description: "If sourcemaps should be uploaded to Sentry, specify their path here"
-    default: false
+    default: "false"
 
 # Conditional syntax isn't supported, but there are workarounds:
 # https://github.com/actions/runner/issues/834#issuecomment-909921245
@@ -60,7 +60,7 @@ runs:
       uses: actions/checkout@v4
 
     - name: Use Node.js ${{ inputs.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
         cache: ${{ (inputs.package-cache != 'false' && inputs.package-cache != '') && inputs.package-cache || '' }}
@@ -103,7 +103,7 @@ runs:
         npm publish ${{ steps.extract_release.outputs.TAG }}
 
     - name: Create Github Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@master
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
       with:
