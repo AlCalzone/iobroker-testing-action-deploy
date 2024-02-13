@@ -12,7 +12,7 @@ Shared Github Actions for ioBroker testing workflows: Deploy step
 | `build`           | Set to `'true'` when the adapter needs a build step before testing                                                                                                                                   | ❌        |      `false`      |
 | `build-command`   | Overwrite the default build command                                                                                                                                                                  | ❌        | `'npm run build'` |
 | `npm-token`       | The token to use to publish to npm                                                                                                                                                                   | ✔         |         -         |
-| `github-token`    | The token to use to create a GitHub release                                                                                                                                                          | ✔         |         -         |
+| `github-token`    | The token to use to create a GitHub release                                                                                                                                                          | ❌         |         -         |
 
 If Sentry integration is desired, the following inputs are used to configure it:
 
